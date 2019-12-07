@@ -6,7 +6,7 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 16:01:31 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/11/24 16:14:03 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/07 01:35:19 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	freemap(t_map *map)
 {
-	ft_memdel(&(map->tab));
+	ft_memdel((void*)&(map->tab));
 }

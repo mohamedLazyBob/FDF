@@ -6,32 +6,11 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 19:58:51 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/06 22:05:38 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/07 01:37:57 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-typedef struct s_temp
-{
-	t_mlxparams	*mlxparams;
-	t_map		*map;
-}				t_temp;
-
-int put(int keycode, void *temp1)
-{
-	t_temp *temp = (t_temp*)temp1;
-	t_map *map = temp->map;
-	if (keycode == 53)
-		exit(0);
-	else if (keycode == 123)
-	{
-		zoom(map);
-		ft_memset(temp->mlxparams->image, 0x0000, temp->mlxparams->length_img * temp->mlxparams->width_img * 4);
-		parallel_proj(temp->mlxparams, *map);
-	}
-	return (0);
-}
 
 void	fdf(t_map *map)
 {

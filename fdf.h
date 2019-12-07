@@ -6,7 +6,7 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 16:34:08 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/06 20:28:40 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/07 01:37:46 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,31 @@ typedef struct	s_mlxxparams
 	int			size_line;
 	int			endian;
 }				t_mlxparams;
+
+/******************************************************************************/
+
+typedef struct s_drowparams
+{
+	    int zoom;
+		    int translation;
+			    int altitude_z;
+}               t_drowparams;
+
+typedef struct s_vars
+{
+	    t_mlxparams     *mlxparams;
+		    t_map           *map;
+			    t_drowparams    *drawparams;
+}               t_vars;
+
+typedef struct s_temp
+{
+	t_mlxparams	*mlxparams;
+	t_map		*map;
+}				t_temp;
+
+int         put(int keycode, void *vartemp);
+/******************************************************************************/
 
 void			fdf(t_map *map);
 int				is_file_valid(int nbr_of_arg, char **arg);
