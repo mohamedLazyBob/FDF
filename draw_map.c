@@ -6,84 +6,143 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 19:25:03 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/06 21:19:36 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/08 20:50:54 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	parallel_proj(t_mlxparams *mlxparams, t_map map)
+void	ft_idx(int *index, int dimlen, int start)
+{
+	index[0] = start;
+	index[1] = index[0] + 1;
+	index[2] = index[0] + dimlen;
+}
+
+/*
+** ***************************************************************************
+*/
+
+void	call_bresenham(t_hook *vars, t_point pt, int *index, int nbr)
+{
+	if (nbr == 0)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, vars->map->tab[index[0]]), \
+				translation2(pt.x, pt.y, vars->map->tab[index[1]]));
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, vars->map->tab[index[0]]),\
+				translation2(pt.x, pt.y, vars->map->tab[index[2]]));
+	}
+	else if (nbr == 1)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, vars->map->tab[index[0]]), \
+				translation2(pt.x, pt.y, vars->map->tab[index[1]]));
+	}
+	else if (nbr == 2)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, vars->map->tab[index[0]]), \
+				translation2(pt.x, pt.y, vars->map->tab[index[2]]));
+	}
+}
+
+/*
+** ***************************************************************************
+*/
+
+void	call_iso_bresenham(t_hook *vars, t_point pt, int *index, int nbr)
+{
+	if (nbr == 0)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[0]])), \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[1]])));
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[0]])), \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[2]])));
+	}
+	else if (nbr == 1)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[0]])), \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[1]])));
+	}
+	else if (nbr == 2)
+	{
+		bresenham(vars->mlxparams, \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[0]])), \
+				translation2(pt.x, pt.y, iso(vars->map->tab[index[2]])));
+	}
+}
+
+/*
+** ***************************************************************************
+*/
+
+void	parallel_proj(t_hook *vars, t_point pt)
 {
 	int		i;
 	int		j;
-	int		index1;
-	int		index2;
-	int		index3;
+	int		index[3];
 
-	j = 0;
-	while (j < map.dim.width - 1)
+	j = -1;
+	while (++j < vars->map->dim.width - 1)
 	{
-		i = 0;
-		while (i < map.dim.length - 1)
+		i = -1;
+		while (++i < vars->map->dim.length - 1)
 		{
-			index1 = j * map.dim.length + i;
-			index2 = index1 + 1;
-			index3 = index1 + map.dim.length;
-			bresenham(mlxparams, map.tab[index1], map.tab[index2]);
-			bresenham(mlxparams, map.tab[index1], map.tab[index3]);
-			i++;
+			ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+			call_bresenham(vars, pt, index, 0);
 		}
-		index1 = j * map.dim.length + i;
-		index3 = index1 + map.dim.length;
-		bresenham(mlxparams, map.tab[index1], map.tab[index3]);
-		j++;
+		ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+		call_bresenham(vars, pt, index, 2);
 	}
-	i = 0;
-	while (i < map.dim.length - 1)
+	i = -1;
+	while (++i < vars->map->dim.length - 1)
 	{
-		index1 = j * map.dim.length + i;
-		index2 = index1 + 1;
-		bresenham(mlxparams, map.tab[index1], map.tab[index2]);
-		i++;
+		ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+		call_bresenham(vars, pt, index, 1);
 	}
-	mlx_put_image_to_window(mlxparams->mlx_ptr, mlxparams->mlx_win, mlxparams->img_ptr, 0, 0);
+	mlx_put_image_to_window(vars->mlxparams->mlx_ptr, \
+							vars->mlxparams->mlx_win, \
+							vars->mlxparams->img_ptr, 0, 0);
 }
 
-void	iso_proj(t_mlxparams *mlxparams, t_map map)
+/*
+** ***************************************************************************
+*/
+
+void	iso_proj(t_hook *vars, t_point pt)
 {
 	int		i;
 	int		j;
-	int		index1;
-	int		index2;
-	int		index3;
-	
-	homothetie(15, &map);
-	translation(500, 100, &map);
-	j = 0;
-	while (j < map.dim.width - 1)
+	int		index[3];
+
+	j = -1;
+	while (++j < vars->map->dim.width - 1)
 	{
-		i = 0;
-		while (i < map.dim.length - 1)
+		i = -1;
+		while (++i < vars->map->dim.length - 1)
 		{
-			index1 = j * map.dim.length + i;
-			index2 = index1 + 1;
-			index3 = index1 + map.dim.length;
-			bresenham(mlxparams, iso(map.tab[index1]), iso(map.tab[index2]));
-			bresenham(mlxparams, iso(map.tab[index1]), iso(map.tab[index3]));
-			i++;
+			ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+			call_iso_bresenham(vars, pt, index, 0);
 		}
-		index1 = j * map.dim.length + i;
-		index3 = index1 + map.dim.length;
-		bresenham(mlxparams, iso(map.tab[index1]), iso(map.tab[index3]));
-		j++;
+		ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+		call_iso_bresenham(vars, pt, index, 2);
 	}
-	i = 0;
-	while (i < map.dim.length - 1)
+	i = -1;
+	while (++i < vars->map->dim.length - 1)
 	{
-		index1 = j * map.dim.length + i;
-		index2 = index1 + 1;
-		bresenham(mlxparams, iso(map.tab[index1]), iso(map.tab[index2]));
-		i++;
+		ft_idx(index, vars->map->dim.length, j * vars->map->dim.length + i);
+		call_iso_bresenham(vars, pt, index, 1);
 	}
-	mlx_put_image_to_window(mlxparams->mlx_ptr, mlxparams->mlx_win, mlxparams->img_ptr, 0, 0);
+	mlx_put_image_to_window(vars->mlxparams->mlx_ptr, \
+							vars->mlxparams->mlx_win, \
+							vars->mlxparams->img_ptr, 0, 0);
 }
+
+/*
+** ***************************************************************************
+*/

@@ -6,7 +6,7 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:16:24 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/06 13:16:43 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/08 07:49:30 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			get_length(char *s)
 	return (length);
 }
 
-void	get_mapdim(int fd, t_map *map)
+void		get_mapdim(int fd, t_map *map)
 {
 	char		*s;
 
@@ -55,6 +55,15 @@ void	get_mapdim(int fd, t_map *map)
 	}
 }
 
+void		ft_allocate_tab(t_point **tab, int size)
+{
+	if (!(*tab = (t_point*)malloc(sizeof(t_point) * size)))
+	{
+		perror("");
+		exit(0);
+	}
+}
+
 t_point		*get_points(int fd, int length, int width)
 {
 	t_point		*tab;
@@ -63,11 +72,7 @@ t_point		*get_points(int fd, int length, int width)
 	char		*to_free;
 
 	ft_bzero(counter, sizeof(int) * 4);
-	if (!(tab = (t_point*)malloc(sizeof(t_point) * (width * length))))
-	{
-		perror("");
-		exit(0);
-	}
+	ft_allocate_tab(&tab, width * length);
 	while (get_next_line(fd, &s) > 0)
 	{
 		to_free = s;
@@ -78,7 +83,8 @@ t_point		*get_points(int fd, int length, int width)
 			skip_space(&s);
 			tab[counter[3]].x = counter[0]++;
 			tab[counter[3]].y = counter[1];
-			tab[counter[3]++].z = ft_atoi(s);
+			tab[counter[3]].z = ft_atoi(s);
+			tab[counter[3]++].v = tab[counter[3]].z;
 			skip_notspace(&s);
 		}
 		counter[1]++;
@@ -87,9 +93,10 @@ t_point		*get_points(int fd, int length, int width)
 	return (tab);
 }
 
-void		get_map(int fd, t_map *map)
+void		get_map(int *fd, t_map *map, char *arg)
 {
-	get_mapdim(fd, map);
-	lseek(fd, 0, SEEK_SET);
-	map->tab = get_points(fd, map->dim.length, map->dim.width);
+	get_mapdim(*fd, map);
+	close(*fd);
+	*fd = open(arg, O_RDONLY);
+	map->tab = get_points(*fd, map->dim.length, map->dim.width);
 }
