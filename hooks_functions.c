@@ -6,7 +6,7 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 00:14:10 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/09 01:51:42 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/10 00:55:55 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_change_z(t_hook *temp, t_map *map, int k)
 		while (col < map->dim.width)
 		{
 			if (k < 0)
-				map->tab[index].z -= 2 * map->tab[index].v;
+				map->tab[index].z -= map->tab[index].v;
 			else if (k > 0)
-				map->tab[index].z += 2 * map->tab[index].v;
+				map->tab[index].z += map->tab[index].v;
 			index++;
 			col++;
 		}
@@ -96,9 +96,9 @@ int		put(int keycode, void *hook)
 	else if (keycode == 35)
 		nbr = (nbr + 1) % 2;
 	else if (keycode == 4)
-		ft_change_z(((t_hook*)hook), ((t_hook*)hook)->map, +5);
+		ft_change_z(((t_hook*)hook), ((t_hook*)hook)->map, +1);
 	else if (keycode == 5)
-		ft_change_z(((t_hook*)hook), ((t_hook*)hook)->map, -5);
+		ft_change_z(((t_hook*)hook), ((t_hook*)hook)->map, -1);
 	else
 		return (0);
 	ft_draw(((t_hook*)hook), nbr);

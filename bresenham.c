@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzaboub <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 22:10:03 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/09 19:13:26 by mzaboub          ###   ########.fr       */
+/*   Created: 2019/11/28 22:10:03 by mzaboub           #+#    #+#             */
+/*   Updated: 2019/12/10 00:57:11 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void	bresenham(t_mlxparams *mlxparams, t_point p1, t_point p2)
 	if (is_out_win(p1, p2) == TRUE)
 		return ;
 	if (dx == 0 && dy == 0 && ((mlxparams->length_img * p1.y + p1.x) >= 0))
-		mlxparams->image[mlxparams->length_img * p1.y + p1.x] = ft_color(p1, p2);
+		mlxparams->image[mlxparams->length_img * p1.y + p1.x] = \
+															ft_color(p1, p2);
 	else if ((n = is_trivial_line(dx, dy)) != -1)
 		trivial_line[n](mlxparams, p1, p2);
 	else

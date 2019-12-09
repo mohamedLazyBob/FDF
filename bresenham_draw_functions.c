@@ -6,7 +6,7 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 23:04:21 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/09 19:23:28 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/10 00:49:49 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 int		ft_color(t_point p1, t_point p2)
 {
 	if (ABS(p1.z) == 0 && ABS(p2.z) == 0)
-		return(0XFFFFFF);
+		return (0XFFFFFF);
 	else if (p2.z == 0 || p1.z == 0)
-		return(0X66FFFF);
+		return (0X66FFFF);
 	else if (ABS(p2.z) <= 5 || ABS(p1.z) <= 5)
-		return(0X66FF99);
+		return (0X66FF99);
 	else
-		return(0X0099FF);
+		return (0X0099FF);
 }
 
 /*
