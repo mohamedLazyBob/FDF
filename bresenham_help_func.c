@@ -6,7 +6,7 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 23:06:53 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/08 23:09:07 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:12:42 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_point			swap_coordinats(t_point point)
 
 	new_pt.x = point.y;
 	new_pt.y = point.x;
+	new_pt.z = point.z;
+	new_pt.v = point.v;
 	return (new_pt);
 }
 
@@ -53,7 +55,7 @@ int				is_vertical(int dx, int dy)
 
 int				is_diagonal(int dx, int dy)
 {
-	if (abs(dx) == abs(dy))
+	if (ABS(dx) == ABS(dy))
 		return (1);
 	return (0);
 }

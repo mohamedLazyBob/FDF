@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mzaboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:10:03 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/08 23:09:08 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:13:26 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_vertical_line(t_mlxparams *mlxparams, t_point pt1, t_point pt2)
 		index = mlxparams->length_img * pt1.y + x;
 		if (index >= 0 && pt1.y < mlxparams->width_img && \
 				pt1.x < mlxparams->length_img && pt1.y >= 0 && pt1.x >= 0)
-			mlxparams->image[index] = COLOR;
+			mlxparams->image[index] = ft_color(pt1, pt2);
 		pt1.y++;
 	}
 }
@@ -67,13 +67,13 @@ void	draw_diagonal_line(t_mlxparams *mlxparams, t_point pt1, t_point pt2)
 	dy = pt2.y - pt1.y;
 	xincr = dx >= 0 ? 1 : -1;
 	yincr = dy >= 0 ? 1 : -1;
-	dx = abs(dx);
+	dx = ABS(dx);
 	while (dx-- >= 0)
 	{
 		index = mlxparams->length_img * pt1.y + pt1.x;
 		if (index >= 0 && pt1.y < mlxparams->width_img && \
 				pt1.x < mlxparams->length_img && pt1.y >= 0 && pt1.x >= 0)
-			mlxparams->image[index] = COLOR;
+			mlxparams->image[index] = ft_color(pt1, pt2);
 		pt1.y += yincr;
 		pt1.x += xincr;
 	}
@@ -111,12 +111,12 @@ void	bresenham(t_mlxparams *mlxparams, t_point p1, t_point p2)
 	if (is_out_win(p1, p2) == TRUE)
 		return ;
 	if (dx == 0 && dy == 0 && ((mlxparams->length_img * p1.y + p1.x) >= 0))
-		mlxparams->image[mlxparams->length_img * p1.y + p1.x] = COLOR;
+		mlxparams->image[mlxparams->length_img * p1.y + p1.x] = ft_color(p1, p2);
 	else if ((n = is_trivial_line(dx, dy)) != -1)
 		trivial_line[n](mlxparams, p1, p2);
 	else
 	{
-		if (abs(dx) > abs(dy))
+		if (ABS(dx) > ABS(dy))
 			draw_in_octant1458(mlxparams, p1, p2);
 		else
 			draw_in_octant2367(mlxparams, p1, p2);

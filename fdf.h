@@ -6,7 +6,7 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 16:34:08 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/12/09 01:22:33 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:11:19 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define COLOR 0X00FFFFFF
 # define TRUE 1
 # define FALSE 0
+# define ABS(v) ((v > 0) ? v : -v)
 
 typedef struct	s_mapdim
 {
@@ -179,6 +180,7 @@ void			ft_get_params_to_center_parallelproject(int *x, int *y, \
 ** in file : bresenham draw function
 */
 
+int				ft_color(t_point p1, t_point p2);
 void			initialize_draw_vars(t_draw_vars *var, t_point p1, \
 														t_point p2);
 void			draw_in_octant2367(t_mlxparams *mlxparams, t_point p1, \
@@ -202,7 +204,6 @@ void			swap(int *a, int *b);
 ** in file : tools 2
 */
 
-int				abs(int a);
 void			zoomout(t_map *map);
 void			zoomin(t_map *map);
 int				min(int a, int b, int c, int d);
