@@ -6,7 +6,7 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 00:55:30 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/10 00:55:38 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/13 03:06:25 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void		get_mapdim(int fd, t_map *map)
 {
 	char		*s;
 
+	s = NULL;
 	get_next_line(fd, &s);
+	if (!s)
+		exit(0);
 	if (!(map->dim.length = get_length(s)))
 	{
 		ft_putendl("No data found.");

@@ -22,14 +22,15 @@ LIB= libft.a
 CC= gcc
 CFLAGES= -Wall -Wextra -Werror
 
-LD_FLAGS= -L$(LIB_PATH) -lmlx -framework OpenGL -framework AppKit 
+LD_FLAGS= -L$(LIB_PATH)
+FRAMEWORK_FLAGS=  -lmlx -framework OpenGL -framework AppKit 
 LD_LIBS= -l$(patsubst lib%.a,%, $(LIB))
 HDR_FLAGS= -I. 
 
 all:$(NAME)
 
 $(NAME): $(LIB_PATH)/$(LIB) $(OBJ)
-	@$(CC) $(LD_FLAGS) $(LD_LIBS) $(OBJ) -o $@
+	@$(CC) $(LD_FLAGS) $(FRAMEWORK_FLAGS) $(LD_LIBS) $(OBJ) -o $@
 	@echo "FDF: executable file is ready ;)" 	########## modify this
 
 $(LIB_PATH)/$(LIB):
