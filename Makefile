@@ -6,7 +6,7 @@
 #    By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 14:59:37 by mzaboub           #+#    #+#              #
-#    Updated: 2019/12/31 18:03:09 by mzaboub          ###   ########.fr        #
+#    Updated: 2019/12/31 18:36:07 by mzaboub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,14 +47,14 @@ LD_LIBS= -l$(patsubst lib%.a,%, $(LIB))
 
 all:$(NAME)
 
-$(NAME): $(LIB_PATH)/$(LIB) $(OBJ) $(HDR)
+$(NAME): $(LIB_PATH)/$(LIB) $(OBJ)
 	@$(CC) $(LD_FLAGS) $(FRAMEWORK_FLAGS) $(LD_LIBS) $(OBJ) -o $@
 	@echo "FDF: executable file is ready ;)"	########## modify this
 
 $(LIB_PATH)/$(LIB):
 	@make -C libft
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HDR)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(HDR_FLAGS) -o $@ -c $<
 
