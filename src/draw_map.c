@@ -6,11 +6,11 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 00:55:40 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/10 00:55:44 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/31 18:04:25 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../headers/fdf.h"
 
 void	ft_idx(int *index, int dimlen, int start)
 {

@@ -6,13 +6,13 @@
 #    By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 14:59:37 by mzaboub           #+#    #+#              #
-#    Updated: 2019/12/31 17:36:23 by mzaboub          ###   ########.fr        #
+#    Updated: 2019/12/31 18:03:09 by mzaboub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= fdf
 
-SRC_PATH= .
+SRC_PATH= src
 SRC_NAME= bresenham.c					check_file.c \
 		  checkdata_storeit.c			draw_map.c	\
 		  freememory.c					hooks_functions.c \
@@ -21,14 +21,18 @@ SRC_NAME= bresenham.c					check_file.c \
 		  bresenham_draw_functions.c	bresenham_help_func.c \
 		  tools2.c
 
-HDR= fdf.h
+HDR_PATH= headers
+HDR_NAME= fdf.h
+
 LIB_PATH= libft
 LIB= libft.a
 
-SRC= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ_PATH= obj
 OBJ_NAME= $(SRC_NAME:.c=.o)
+
+SRC= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+HDR= $(addprefix $(HDR_PATH)/,$(HDR_NAME))
 
 CC= gcc
 CFLAGES= -Wall -Wextra -Werror

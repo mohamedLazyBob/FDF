@@ -6,11 +6,11 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:13:41 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/10 00:55:21 by mzaboub          ###   ########.fr       */
+/*   Updated: 2019/12/31 18:04:19 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../headers/fdf.h"
 
 int		is_file_valid(int nbr_of_arg, char **arg)
 {

@@ -6,11 +6,11 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 00:55:49 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/13 14:56:06 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/31 18:14:47 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../headers/fdf.h"
 
 void	freememory(t_map *map, t_mlxparams *mlxparams)
 {

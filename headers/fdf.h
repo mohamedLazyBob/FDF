@@ -6,7 +6,7 @@
 /*   By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 16:34:08 by mzaboub           #+#    #+#             */
-/*   Updated: 2019/12/13 15:02:32 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/12/31 18:15:17 by mzaboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			ft_get_params_to_center_isoproject(int *x, int *y, t_map *map);
 void			ft_get_params_to_center_parallelproject(int *x, int *y, \
 				t_map *map);
 void			freemap(t_map *map, t_mlxparams *mlxparams);
+void			freememory(t_map *map, t_mlxparams *mlxparams);
 void			call_bresenham(t_hook *vars, t_point pt, int *index, int nbr);
 void			call_iso_bresenham(t_hook *vars, t_point pt, int *index, \
 				int nbr);

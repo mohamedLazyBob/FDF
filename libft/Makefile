@@ -6,7 +6,7 @@
 #    By: mzaboub <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 06:06:14 by mzaboub           #+#    #+#              #
-#    Updated: 2019/12/08 23:17:48 by mzaboub          ###   ########.fr        #
+#    Updated: 2019/12/31 18:01:15 by mzaboub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,16 @@ SRC_NAME= ft_atoi.c  	ft_bzero.c		ft_charinword.c	ft_isalnum.c	\
 		  ft_strrchr.c	ft_strrev.c		ft_strsplit.c	ft_strstr.c 	\
 		  ft_strsub.c	ft_strtrim.c	ft_tolower.c	ft_toupper.c 	\
 		  get_next_line.c	ft_lstdelone.c ft_isspace.c
-SRC= $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 
+HDR_PATH= .
+HDR_NAME= libft.h
 
 OBJ_PATH= obj
 OBJ_NAME= $(SRC_NAME:.c=.o)
+
 OBJ= $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
+SRC= $(addprefix $(SRC_PATH)/, $(SRC_NAME))
+HDR= $(addprefix $(HDR_PATH)/, $(HDR_NAME))
 
 
 CFLAGS=  -Wall -Wextra -Werror
@@ -45,7 +49,7 @@ HDR_FLAGS= -I.
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HDR)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "libft: library compilled"
