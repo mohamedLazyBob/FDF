@@ -72,6 +72,7 @@ int		ft_exit(void *hook)
 
 	hk = (t_hook*)hook;
 	mlx_destroy_image(hk->mlxparams->mlx_ptr, hk->mlxparams->mlx_win);
+	freememory(hk->map, hk->mlxparams);
 	exit(0);
 }
 
@@ -81,7 +82,7 @@ int		ft_exit(void *hook)
 
 int		put(int keycode, void *hook)
 {
-	static int	nbr;
+	static int	nbr = 0;
 
 	if (keycode == 53)
 		ft_exit(hook);
